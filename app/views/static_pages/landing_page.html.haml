@@ -1,0 +1,57 @@
+.jumbotron
+  .display-4
+    Prod-E seu aprendizado em análise
+
+  .p-4
+  - if current_user
+    = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
+      .input-group
+        = f.search_field :titulo_cont, class: 'form-control-sm', style: 'float: left; width: 150px; ', placeholder: 'Pesquisar curso', :autocomplete => :off
+        %span.input-group-append
+          %button.btn.btn-primary.btn-sm{:type => "submit"}
+            Pesquisar
+
+.card-group
+  .card.card-body
+    %h1
+      .fa.fa-graduation-cap
+    = Course.count
+    Cursos
+    .row
+    Cursos disponíveis
+  .card.card-body
+    %h1
+    = Course.distinct.count(:user_id)
+    Professores
+    .row
+    Encontre o seu professor
+  .card.card-body
+    %h1
+    = User.count
+    Estudantes
+    .row
+    Conheça seus colegas e interaja com eles para ampliar seu conhecimento
+
+
+%hr
+%h2
+  Cursos populares
+.card-columns
+  - @courses.each do |course|
+    = render 'courses/course', course: course
+
+%hr
+%h2 
+  Cursos mais bem avaliados
+.card-columns
+  - @courses.each do |course|
+    = render 'courses/course', course: course
+
+%hr
+%h2 
+  Últimos cursos
+.card-columns
+  - @latest_couses.each do |course|
+    = render 'courses/course', course: course
+
+%hr

@@ -1,0 +1,33 @@
+.card
+  .card-header
+    .fa.fa-user
+    - if user.online?
+      Online 
+    - else
+      Offline
+    = link_to user.email, user_path(user)
+  .card-footer
+    Signed up
+    = time_ago_in_words(user.created_at)
+    ago
+  .card-footer
+    = 'Contagem de Sign in: '.humanize
+    = user.sign_in_count
+    .row
+    = 'Sign in atual: '.humanize
+    = user.current_sign_in_at
+    .row
+    = 'Último sign in: '.humanize
+    = user.last_sign_in_at
+    .row
+    = 'IP do Sign in atual: '.humanize
+    = user.current_sign_in_ip
+    .row
+    = 'IP do último Sign in: '.humanize
+    = user.last_sign_in_ip
+
+    .card-footer
+      - user.roles.each do |role|
+        = role.name
+      - if policy(user).edit?
+        = link_to 'Editar atribuições', edit_user_path(user), class: 'btn btn-sm btn-warning'

@@ -1,0 +1,15 @@
+-# frozen_string_literal: true
+= simple_form_for(@course) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :titulo
+    = f.input :descricao
+    = f.input :linguagens
+    = f.input :nivel, collection: Course.niveis, include_blank: true
+    /= f.input :nivel, collection: [ "Iniciante", "Intermediário", "Avançado"]
+
+  %p
+  .form-actions
+    = f.submit "Atualizar curso", class:"btn btn-primary"

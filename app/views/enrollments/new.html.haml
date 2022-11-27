@@ -1,0 +1,16 @@
+- content_for :titulo do
+  TestMaker  
+  \| 
+  Nova Inscrição
+
+.card
+  .card-header
+    %h3
+      Inscrição
+      = link_to @course.titulo, course_path(@course)
+
+  .card-body
+    = form_tag course_enrollments_path(@course) do
+      = submit_tag "Inscreva-se", class: 'btn btn-lg btn-success'
+  .card-footer
+    = link_to 'Voltar', enrollments_path

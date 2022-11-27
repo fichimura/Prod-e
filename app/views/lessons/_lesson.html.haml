@@ -1,0 +1,12 @@
+.card
+  .card-header
+    = link_to lesson.titulo, course_lesson_path(@course, lesson)
+  - if policy(lesson).show?
+    .card-body
+      = lesson.conteudo 
+      = lesson.course
+  - if policy(lesson).edit?
+    .card-footer
+      = link_to 'Editar', edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-warning'
+      = link_to 'Deletar', [@course, lesson], method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-sm btn-danger'
+%p

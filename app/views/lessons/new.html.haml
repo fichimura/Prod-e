@@ -1,0 +1,14 @@
+= link_to 'Cursos', courses_path
+\/
+= link_to @course.titulo, course_path(@course)
+\/
+Nova lição
+%p  
+
+.card
+  .card-header
+    %h1 Nova lição 
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Voltar ao curso', course_path(@course)

@@ -1,0 +1,19 @@
+%hr
+%footer
+  .container
+    .row
+      .col-md-4 
+        = Time.now.year
+        Testemaker Comp.
+        .row
+        = mail_to 'test_maker@testmaker.com'
+        .row
+      .col-md-4
+        Políticas de Privacidade
+        .row
+        Termos e Condições
+      .col-md-4
+        Sobre
+        .row
+        = link_to 'Ensine na plataforma', new_course_path
+%br

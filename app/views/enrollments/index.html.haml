@@ -1,0 +1,37 @@
+- content_for :title do
+  TestMaker 
+  \| 
+  Todas as inscrições
+
+%h3
+  .text-center
+    Inscrições: 
+    = @enrollments.count
+%p
+
+.table-responsive
+  %table.table.table-bordered.table-striped.table-sm
+    %thead
+      %tr
+        %th Course
+        %th User
+        %th Avaliacao
+        %th Comentarios
+        %th
+        %th
+        %th
+
+    %tbody
+      - @enrollments.each do |enrollment|
+        %tr
+          %td= enrollment.course
+          %td= enrollment.user
+          %td= enrollment.avaliacao
+          %td= enrollment.comentarios
+          %td= link_to 'Detalhes', enrollment
+          %td= link_to 'Editar', edit_enrollment_path(enrollment)
+          %td= link_to 'Deletar', enrollment, method: :delete, data: { confirm: 'Você tem certeza?' }
+
+%br
+
+= link_to 'Nova inscrição', new_enrollment_path
