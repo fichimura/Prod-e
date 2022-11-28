@@ -1,7 +1,7 @@
 class Lesson < ApplicationRecord
   belongs_to :course
   validates :titulo, :conteudo, :course, presence: true
-
+  has_many :user_lessons
 
   extend FriendlyId
   friendly_id :titulo, use: :slugged
@@ -12,4 +12,11 @@ class Lesson < ApplicationRecord
   def to_s
     titulo
   end
+
+  def viewed(user)
+    self.user_lessons.where(user: user).present?
+    #self.user_lessons.where(user_id: [user_id], lesson_id: [self.id]).present?
+    
+  end
+
 end

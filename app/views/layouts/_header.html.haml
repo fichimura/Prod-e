@@ -1,5 +1,6 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-  %a.navbar-brand{:href => "/"} Prod-E
+  %a.navbar-brand{:href => "/"}
+    Prod-E
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
@@ -11,46 +12,54 @@
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(courses_path)}"}
           = link_to courses_path, class: 'nav-link' do
             Cursos
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_course_path)}"}
-          = link_to new_course_path, class: 'nav-link' do
-            Novo Curso
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(users_path)}"}
-          = link_to users_path, class: 'nav-link' do
-            Usuarios
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(enrollments_path)}"}
-          = link_to enrollments_path, class: 'nav-link' do
-            Inscrições
-            
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(activity_path)}"}
-          = link_to activity_path, class: 'nav-link' do
-            Atividade
+        .form-inline
+          /SEARCH IN NAVBAR
+          = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
+            .input-group
+              = f.search_field :titulo_cont, class: 'form-control-sm', style: 'float: left; width: 150px; ', placeholder: 'Procure por curso', :autocomplete => :off
+              %span.input-group-append
+                %button.btn.btn-primary.btn-sm{:type => "submit"}
+                  %span.fa.fa-search{"aria-hidden" => "true"}
+                    Pesquisar
+      %ul.navbar-nav.mr-auto
+        - if current_user.has_role?(:estudante)
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(enrollments_path)}"}
+            = link_to enrollments_path, class: 'nav-link' do
+              Inscrições
+        - if current_user.has_role?(:professor)
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_course_path)}"}
+            = link_to new_course_path, class: 'nav-link' do
+              Novo Curso
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(enrollments_path)}"}
+            = link_to enrollments_path, class: 'nav-link' do
+              Inscrições
 
+        - if current_user.has_role?(:admin)
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(enrollments_path)}"}
+            = link_to enrollments_path, class: 'nav-link' do
+              Inscrições
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(users_path)}"}
+            = link_to users_path, class: 'nav-link' do
+              Usuários
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(activity_path)}"}
+            = link_to activity_path, class: 'nav-link' do
+              Atividade Usuários
 
-
-      /SEARCH IN NAVBAR
-      = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
-        .input-group
-          = f.search_field :titulo_cont, class: 'form-control-sm', style: 'float: left; width: 150px; ', placeholder: 'Pesquisar curso', :autocomplete => :off
-          %span.input-group-append
-            %button.btn.btn-primary.btn-sm{:type => "submit"}
-              Pesquisar
-      -# .form-inline.my-2.my-lg-0
-      -#   = form_tag(courses_path, method: :get) do
-      -#     .input-group
-      -#       = text_field_tag :titulo, params[:titulo], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
-      -#       %span.input-group-append
-      -#         %button.btn.btn-primary.btn-sm{:type => "submit"}
-      -#           Pesquisar
-      %b= current_user.username
-      %ul.navbar-nav.mr-right
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(root_path)}"}
+        %b= current_user.username
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_path(current_user))}"}
+          = link_to user_path(current_user), class: 'nav-link' do
+            Infos
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(edit_user_registration_path)}"}
           = link_to edit_user_registration_path, class: 'nav-link' do
-            Configurações da Conta
-        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(root_path)}"}
-          = link_to destroy_user_session_path, method: :delete,class: 'nav-link' do
-            Sair
+            Configurações da conta
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(destroy_user_session_path)}"}
+          = link_to destroy_user_session_path, method: :delete, class: 'nav-link' do
+            Sign out
 
     - else
-      %ul.navbar-nav
-        %li.nav-item= link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
-        %li.nav-item= link_to 'Log In', new_user_session_path, class: 'nav-link'
+      %ul.navbar-nav.mr-auto
+      %ul.navbar-nav.mr-right
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_registration_path)}"}
+          = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_user_session_path)}"}
+          = link_to 'Log In', new_user_session_path, class: 'nav-link'

@@ -4,6 +4,14 @@
   .card-body
     = course.descricao
 
+  .card-footer
+    .text-center
+      = review_button(course)
+
+  .card-footer
+    .text-warning
+      = course.avaliacao_media
+
 
   .card-footer
     Lições: 
