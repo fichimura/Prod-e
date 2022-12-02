@@ -1,8 +1,8 @@
-.jumbotron
-  .display-4
-    Prod-E seu aprendizado em análise
-
-  .p-4
+.jumbotron.d-flex.flex-column
+  .display-6
+    Prod-E, seu aprendizado em análise
+  %hr
+    .my-4
   - if current_user
     = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
       .input-group
@@ -11,7 +11,7 @@
           %button.btn.btn-primary.btn-sm{:type => "submit"}
             Pesquisar
 
-.card-group
+.card-group.p-4
   .card.card-body
     %h1
       .fa.fa-graduation-cap
@@ -30,7 +30,7 @@
     = User.count
     Estudantes
     .row
-    Conheça seus colegas e interaja com eles para ampliar seu conhecimento
+    Interaja com seus novos colegas para ampliar seu conhecimento
 
 
 %hr

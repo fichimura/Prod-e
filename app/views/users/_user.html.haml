@@ -11,19 +11,19 @@
     = time_ago_in_words(user.created_at)
     ago
   .card-footer
-    = 'Contagem de Sign in: '.humanize
+    = 'Contagem de logins: '.humanize
     = user.sign_in_count
     .row
-    = 'Sign in atual: '.humanize
+    = 'Login atual em: '.humanize
     = user.current_sign_in_at
     .row
-    = 'Último sign in: '.humanize
+    = 'Último login em: '.humanize
     = user.last_sign_in_at
     .row
-    = 'IP do Sign in atual: '.humanize
+    = 'IP do login atual: '.humanize
     = user.current_sign_in_ip
     .row
-    = 'IP do último Sign in: '.humanize
+    = 'IP do último login: '.humanize
     = user.last_sign_in_ip
 
     .card-footer

@@ -25,11 +25,11 @@
         %th id
         %th= sort_link(@q, :email)
         %th Criado em
-        %th= 'Contagem de Sign in'.humanize
-        %th= 'Sign in atual em'.humanize
-        %th= 'Último Sign in em'.humanize
-        %th= 'IP do atual Sign in'.humanize
-        %th= 'IP do último Sign in'.humanize
+        %th= 'Contagem de logins'.humanize
+        %th= 'Login atual em'.humanize
+        %th= 'Último login em'.humanize
+        %th= 'IP do login atual'.humanize
+        %th= 'IP do último login'.humanize
         %th Roles
     %tbody
       - @users.each do |user|

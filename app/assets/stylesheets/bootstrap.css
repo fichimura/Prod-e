@@ -7698,6 +7698,10 @@ textarea.form-control-lg {
   margin-right: auto !important;
 }
 
+.ml-20 {
+    margin-left: 20px;
+}
+
 .mb-0 {
   margin-bottom: 0 !important;
 }
