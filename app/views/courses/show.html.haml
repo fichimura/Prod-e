@@ -1,13 +1,21 @@
-= link_to 'Cursos', courses_path
-\/
-= link_to @course.titulo, course_path(@course)
-%p
-
 .row
-    .col-lg-6
-        = render 'courses/course', course: @course
-    .col-lg-6
-        = link_to 'Adicionar lição', new_course_lesson_path(@course, @lesson), class: 'btn btn-primary btn-sm btn-block'
-        %p
-        - @lessons.each do |lesson|
-            =render 'lessons/lesson', lesson: lesson
+  .col-lg-8.order-1.order-lg-1
+    .jumbotron  
+      = render 'courses/course', course: @course
+
+    %h4
+      = pluralize(@course.lessons.count, 'lições')
+      .float-right
+        = number_to_percentage(@course.progress(current_user), precision: 0)
+    %ul.list-group
+      - @lessons.each do |lesson|
+        %li.list-group-item
+          = render 'lessons/lesson_preview', lesson: lesson
+    %p
+
+    %h4
+      = pluralize(@enrollments_with_review.count, 'avaliações')
+    - @enrollments_with_review.each do |enrollment|
+      = render 'enrollments/enrollment', enrollment: enrollment
+      %p
+%br

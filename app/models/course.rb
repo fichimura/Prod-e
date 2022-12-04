@@ -4,8 +4,10 @@ class Course < ApplicationRecord
     
     belongs_to :user
     has_many :lessons, dependent: :destroy
-    has_many :enrollments
+    has_many :enrollments, dependent: :restrict_with_error
     has_many :user_lessons, through: :lessons
+
+    validates :titulo, uniqueness: true
 
     def to_s
         titulo

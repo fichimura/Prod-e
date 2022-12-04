@@ -12,6 +12,7 @@ class Enrollment < ApplicationRecord
   validate :cant_subscribe_to_own_course 
   
    scope :pending_review, -> { where(avaliacao: [0, nil, ""], comentarios: [0, nil, ""]) }
+   scope :reviewed, -> { where.not(avaliacao: [0, nil, ""]) }
 
   def to_s
     user.to_s + " " + course.to_s

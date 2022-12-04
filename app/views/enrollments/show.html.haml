@@ -1,18 +1,1 @@
-%p#notice= notice
-
-%p
-  %b Curso:
-  = @enrollment.course
-%p
-  %b Usuario:
-  = @enrollment.user
-%p
-  %b Avaliação :
-  = @enrollment.avaliacao
-%p
-  %b Comentários:
-  = @enrollment.comentarios
-
-= link_to 'Editar', edit_enrollment_path(@enrollment)
-\|
-= link_to 'Voltar', enrollments_path
+= render 'enrollments/enrollment', enrollment: @enrollment

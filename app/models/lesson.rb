@@ -1,7 +1,7 @@
 class Lesson < ApplicationRecord
   belongs_to :course
   validates :titulo, :conteudo, :course, presence: true
-  has_many :user_lessons
+  has_many :user_lessons, dependent: :destroy
 
   extend FriendlyId
   friendly_id :titulo, use: :slugged

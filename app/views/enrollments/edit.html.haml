@@ -7,11 +7,11 @@
 .card
   .card-header
     %h3
-      .fa.fa-lock-open
+    .text-warning
       Editando inscrição
   .card-body
     = render 'form'
   .card-footer
     = link_to 'Detalhes da inscrição', @enrollment
     \|
-    = link_to 'Voltar', enrollments_path
+    = link_to 'Voltar', course_path(@enrollment.course)

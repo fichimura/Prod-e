@@ -33,25 +33,21 @@
     Interaja com seus novos colegas para ampliar seu conhecimento
 
 
-%hr
+%p
+
 %h2
-  Cursos populares
+  .fa.fa-user-graduate
+  Continue Aprendendo
 .card-columns
-  - @courses.each do |course|
+  - @enrolled_courses.each do |course|
     = render 'courses/course', course: course
+
 
 %hr
 %h2 
   Cursos mais bem avaliados
 .card-columns
-  - @courses.each do |course|
-    = render 'courses/course', course: course
-
-%hr
-%h2 
-  Últimos cursos
-.card-columns
-  - @latest_couses.each do |course|
+  - @top_rated_courses.each do |course|
     = render 'courses/course', course: course
 
 %hr

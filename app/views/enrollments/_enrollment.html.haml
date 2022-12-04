@@ -1,0 +1,13 @@
+.card
+  .card-header
+    = link_to enrollment.user.username, user_path(enrollment.user)
+    = time_ago_in_words(enrollment.updated_at)
+    = link_to enrollment.course, course_path(enrollment.course)
+  .card-body
+    %b= enrollment.avaliacao
+    .fa.fa-comment
+    %small= enrollment.comentarios
+  - if current_user
+    .card-footer
+      - if policy(enrollment).edit?
+        = link_to 'Editar Avaliação', edit_enrollment_path(enrollment)

@@ -9,29 +9,44 @@
     = @enrollments.count
 %p
 
+= search_form_for @q , url: @ransack_path do |f|
+  = f.search_field :user_email_cont, placeholder: 'email'
+  = f.search_field :course_titulo_cont, placeholder: 'curso'
+  = f.search_field :avaliacao_eq, placeholder: 'avaliação'
+  = f.search_field :comentarios_cont, placeholder: 'comentarios'
+  = f.submit
+= link_to 'Limpar campos', @ransack_path
+
 .table-responsive
   %table.table.table-bordered.table-striped.table-sm
     %thead
       %tr
-        %th Course
-        %th User
-        %th Avaliacao
+        %th 
+          = sort_link(@q, :user_email, 'Usuário')
+        %th
+          = sort_link(@q, :course_titulo, 'Curso')
+        %th
+          Criado em
+        %th
+          Atualizado em
+        %th
+          = sort_link(@q, :avaliacao)
         %th Comentarios
-        %th
-        %th
-        %th
+        %th Ações 
 
     %tbody
       - @enrollments.each do |enrollment|
         %tr
-          %td= enrollment.course
-          %td= enrollment.user
+          %td= link_to enrollment.user, user_path(enrollment.user)
+          %td= link_to enrollment.course, course_path(enrollment.course)
+          %td= enrollment.created_at.strftime("%d/%b/%Y, %H:%M")
+          %td
+          - if enrollment.avaliacao.present?
+            = enrollment.updated_at.strftime("%d/%b/%Y, %H:%M")
           %td= enrollment.avaliacao
           %td= enrollment.comentarios
-          %td= link_to 'Detalhes', enrollment
-          %td= link_to 'Editar', edit_enrollment_path(enrollment)
-          %td= link_to 'Deletar', enrollment, method: :delete, data: { confirm: 'Você tem certeza?' }
+          %td
+            = link_to 'Detalhes', enrollment
+            = link_to 'Editar', edit_enrollment_path(enrollment)
+            = link_to 'Deletar', enrollment, method: :delete, data: { confirm: 'Você tem certeza?' }
 
-%br
-
-= link_to 'Nova inscrição', new_enrollment_path

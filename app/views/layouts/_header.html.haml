@@ -13,25 +13,35 @@
           = link_to courses_path, class: 'nav-link' do
             Cursos
         - if current_user.has_role?(:estudante)
-          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(enrollments_path)}"}
-            = link_to enrollments_path, class: 'nav-link' do
+
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(enrolled_courses_path)}"}
+            = link_to enrolled_courses_path, class: 'nav-link' do
               Inscrições
         - if current_user.has_role?(:professor)
           %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_course_path)}"}
             = link_to new_course_path, class: 'nav-link' do
               Novo Curso
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(created_courses_path)}"}
+            = link_to created_courses_path, class: 'nav-link' do
+              Cursos criados
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(my_students_enrollments_path)}"}
+            = link_to my_students_enrollments_path, class: 'nav-link' do
+              Meus Alunos
 
         - if current_user.has_role?(:admin)
           %li.nav-item{class: "#{'active font-weight-bold' if current_page?(users_path)}"}
             = link_to users_path, class: 'nav-link' do
               Usuários
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(enrollments_path)}"}
+            = link_to enrollments_path, class: 'nav-link' do
+              Inscrições
           %li.nav-item{class: "#{'active font-weight-bold' if current_page?(activity_path)}"}
             = link_to activity_path, class: 'nav-link' do
               Atividade Usuários
 
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(user_path(current_user))}"}
           = link_to user_path(current_user), class: 'nav-link' do
-            Infos
+            Infos Usuário
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(edit_user_registration_path)}"}
           = link_to edit_user_registration_path, class: 'nav-link' do
             %b= current_user.username
